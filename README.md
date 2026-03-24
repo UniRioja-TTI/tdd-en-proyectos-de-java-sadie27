@@ -1,6 +1,6 @@
-# Taller Transversal I – Práctica 3: TDD en Java
+# Taller Transversal I – Práctica 3 y 5: TDD en Java, Javadoc y GitHub Actions
 
-Proyecto de ejemplo para la practica 3 de la asignatura **Taller Transversal I: Programación y Proceso de Información** de la Universidad de La Rioja (curso 25/26).
+Proyecto de ejemplo para la practica 3 y 5 de la asignatura **Taller Transversal I: Programación y Proceso de Información** de la Universidad de La Rioja (curso 25/26).
 
 ## Autor
 
@@ -8,7 +8,7 @@ Proyecto de ejemplo para la practica 3 de la asignatura **Taller Transversal I: 
 
 ## Descripción del Proyecto
 
-Este proyecto implementa un sistema de gestión de tareas siguiendo la metodología **Test-Driven Development (TDD)**
+Este proyecto implementa un sistema de gestión de tareas siguiendo la metodología **Test-Driven Development (TDD)**, con documentación completa en Javadoc y pipeline de integración continua mediante GitHub Actions.
 
 Sistema de gestión de tareas que permite:
 - Crear y gestionar tareas con fechas límite
@@ -23,13 +23,16 @@ El proyecto busca usar la metodología TDD para :
 - **Mocks**: Objetos simulados para verificar interacciones
 - **Tests de integración**: Pruebas de flujos completos del sistema
 
+**Documentación de la API:** [https://sadie27.github.io/tdd-en-proyectos-de-java-sadie27/](https://sadie27.github.io/tdd-en-proyectos-de-java-sadie27/)
+
 ## Requisitos Previos
 
-- Java 21 
+- Java 21
 - Maven 3.6+
 - Un IDE compatible con Java
 
-### Ejemplo de Uso del Servicio
+
+## Ejemplo de Uso del Servicio
 
 ```java
 // Crear dependencias
@@ -58,13 +61,18 @@ List<ToDo> pendientes = servicio.listarPendientes();
 ```
 tdd-en-proyectos-de-java-sadie27/
 │
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                           # Pipeline de integración continua
+│       └── javadoc.yml                      # Generación y publicación de Javadoc
+│
 ├── src/
 │   ├── main/
 │   │   ├── java/com/tt1/test/
 │   │   │   ├── App.java                    # Clase principal
-│   │   │   ├── ToDo.java                   
+│   │   │   ├── ToDo.java
 │   │   │   ├── Servicio.java               # Lógica de negocio principal
-│   │   │   ├── Repositorio.java            
+│   │   │   ├── Repositorio.java
 │   │   │   ├── IRepositorio.java           # Interfaz del repositorio
 │   │   │   ├── IDB.java                    # Interfaz de base de datos
 │   │   │   ├── DBStub.java                 # Stub de la BD
@@ -88,9 +96,10 @@ tdd-en-proyectos-de-java-sadie27/
 │           ├── MailerStubTest.java          # Tests del stub de Mailer
 │           └── Test_Apartado5.java
 │
+├── docs/                                    # Documentación Javadoc generada
 ├── pom.xml                                  # Configuración de Maven
 ├── LICENSE                                  # Licencia del proyecto
-└── README.md                                
+└── README.md
 ```
 
 ## Metodología TDD
@@ -115,11 +124,28 @@ Este proyecto sigue los principios de TDD:
 3. **Tests de Integración**: Verifican el funcionamiento conjunto de componentes
    - `ServicioIntegrationTest`
 
+## Workflows de GitHub Actions
+
+#### CI Pipeline (`.github/workflows/ci.yml`)
+- Se ejecuta en cada push a `main`
+- Compila el proyecto y ejecuta todos los tests
+- Si los tests pasan, actualiza automáticamente la rama `early`
+- Si los tests fallan, `early` no se modifica, manteniendo siempre una versión funcional
+
+#### Javadoc Deployment (`.github/workflows/javadoc.yml`)
+- Se ejecuta en cada push a `stable`
+- Genera la documentación Javadoc completa del proyecto
+- Publica automáticamente en GitHub Pages
+- Mantiene actualizada la documentación pública de la API
+
 ## Tecnologías Utilizadas
 
 - **Java 21**: Lenguaje de programación
 - **Maven**: Gestión de dependencias y construcción
 - **JUnit 5**: Framework de testing
+- **Javadoc**: Generación de documentación de la API
+- **GitHub Actions**: Integración continua y despliegue automático
+- **GitHub Pages**: Hosting de la documentación pública
 
 ## Licencia
 
